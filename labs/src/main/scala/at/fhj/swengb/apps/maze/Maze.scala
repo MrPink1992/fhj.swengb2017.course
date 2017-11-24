@@ -1,5 +1,7 @@
 package at.fhj.swengb.apps.maze
 
+/** Companion Object for case class Maze **/
+
 object Maze {
 
   val SmallMaze = Maze(10, 10, Rect(10, 10))
