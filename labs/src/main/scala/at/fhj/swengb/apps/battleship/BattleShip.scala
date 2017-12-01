@@ -54,5 +54,6 @@ case class BattleShip(name: String, positions: Set[BattlePos]) extends Vessel {
   require(allCoordinatesAreTheSameForXOrY)
 
   // additional requirement is needed to check for connectedness
+  // has to be true for all battleships
   require(true)
 }

@@ -1,13 +1,10 @@
 package at.fhj.swengb.apps.maze
 
-<<<<<<< HEAD
-/** Companion Object for case class Maze **/
 
-=======
 /**
   * Companion object for case class Maze
   */
->>>>>>> 6623c114938733b3cc3ad7f6bb6ab1838d7817c1
+
 object Maze {
 
   val SmallMaze = Maze(10, 10, Rect(10, 10))

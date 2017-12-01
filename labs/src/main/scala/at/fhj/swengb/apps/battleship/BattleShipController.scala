@@ -51,14 +51,48 @@ case object Horizontal extends Direction
 case object Vertical extends Direction
 
 
-
-
-
-
 // TODO add additional vessels, along with specs for each vessel. start with Cruiser
+
+
+object Cruiser {
+
+  def apply (battleField: BattleField): Cruiser = {
+
+    Cruiser(Set[Vessel](BattleShip("Cruiser Robusto", BattlePos(7,3), Horizontal)))
+  }
+}
+
+case class Cruiser(vessels:Set[Vessel]) {
+
+  def findByPos(pos: BattlePos): Option[Vessel] = vessels.find(v => v.positions.contains(pos))
+
+  def findByName(name: String): Option[Vessel] = vessels.find(v => v.name == name)
+
+}
+
+
+object Destroyer {
+
+  def apply (battleField: BattleField): Destroyer = {
+
+    Destroyer(Set[Vessel](BattleShip("Destroy Themwithfire", BattlePos(9,2), Vertical)))
+  }
+}
+
+case class Destroyer(vessels:Set[Vessel]){
+
+  def findByPos(pos: BattlePos): Option[Vessel] = vessels.find(v => v.positions.contains(pos))
+
+  def findByName(name: String): Option[Vessel] = vessels.find(v => v.name == name)
+
+}
+
+
+
 // TODO add Cruiser class + object (4 cells)
 // TODO add Destroyer class + object (3 cells)
 // TODO add Submarine class + object (2 cells)
+
 
 object Fleet {
 
