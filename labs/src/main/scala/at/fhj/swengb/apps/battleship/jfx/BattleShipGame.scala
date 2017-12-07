@@ -2,7 +2,7 @@ package at.fhj.swengb.apps.battleship.jfx
 
 import javafx.scene.layout.GridPane
 
-import at.fhj.swengb.apps.battleship.{BattleField, BattlePos, Vessel}
+import at.fhj.swengb.apps.battleship.{BattleField, BattlePos, Fleet, Vessel}
 
 
 
@@ -10,6 +10,7 @@ case class BattleShipGame(battleField: BattleField,
                           getCellWidth: Int => Double,
                           getCellHeight: Int => Double,
                           log: String => Unit) {
+
 
   var hits: Map[Vessel, Set[BattlePos]] = Map()
 
@@ -29,7 +30,39 @@ case class BattleShipGame(battleField: BattleField,
   // TODO make sure that when a vessel was destroyed, it is sunk and cannot be destroyed again. it is destroyed already.
   // TODO if all vessels are destroyed, display this to the user
   // TODO reset game state when a new game is started
-  def updateGameState(vessel: Vessel, pos: BattlePos): Unit = ()
+  def updateGameState(vessel: Vessel, pos: BattlePos): Unit = {
+    if (battleField.fleet.vessels != sunkShips) {
+      if (!sunkShips.contains(vessel)) {
+        if (hits.contains(vessel)) {
+          val currentHits: Set[BattlePos] = hits(vessel)
+          val updatedHits = currentHits + pos
+
+          if (currentHits.contains(pos)) {
+            log("Commander, your torpedo already hit me, please have mercy!")
+          }
+
+
+          if (updatedHits == vessel.occupiedPos) {
+            log("Vessel" + vessel.name + "was destroyed")
+            sunkShips = sunkShips + vessel
+
+
+          }
+
+
+          hits = hits.updated(vessel, currentHits + pos)
+
+        } else {
+          hits = hits.updated(vessel, Set(pos))
+        }
+      } else {
+        log("Vessel is on the ground of the sea")
+      }
+    } else {
+        log("GAME OVER. All ships lost.")
+    }
+
+  }
 
 
   // 'display' cells
